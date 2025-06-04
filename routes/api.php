@@ -10,3 +10,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/saludo', [ContratoController::class, 'mostrarSaludo']);
 
+Route::post('/albaranes', [ContratoController::class,'store']);
+
+

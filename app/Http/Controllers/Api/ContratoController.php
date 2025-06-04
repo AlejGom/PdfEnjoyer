@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contrato;
 
 class ContratoController extends Controller
 {
@@ -34,7 +35,27 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'   => 'required|string',
+            'subnombre'=> 'required|string',
+            'archivo'  => 'required|file|mimes:pdf',
+            'fecha'    => 'required|date',
+        ]);
+
+        $rutaArchivo = $request->file('archivo')->store('albaranes', 'public');
+
+        $albaran = Contrato::create([
+            'nombre'   => $request->nombre,
+            'subnombre'=> $request->subnombre,
+            'archivo'  => $rutaArchivo,
+            'fecha'    => $request->fecha,
+        ]);
+
+        return response()->json([
+            'mensaje' => 'Albarán guardado correctamente',
+            'albaran' => $albaran
+        ], 201);
+
     }
 
     /**
