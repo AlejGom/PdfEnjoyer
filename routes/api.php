@@ -12,4 +12,7 @@ Route::get('/saludo', [ContratoController::class, 'mostrarSaludo']);
 
 Route::post('/albaranes', [ContratoController::class,'store']);
 
+Route::get('/contratos/{id}', [ContratoController::class,'show']);
+
+Route::get('/contratos', [ContratoController::class,'showAll']);
 

@@ -63,7 +63,21 @@ class ContratoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $contrato = Contrato::findOrFail($id);
+
+        return response()->json([
+            'id'       => $contrato->id,
+            'nombre'   => $contrato->nombre,
+            'subnombre'=> $contrato->subnombre,
+            'archivo'  => $contrato->archivo,
+            'fecha'    => $contrato->fecha
+        ]);
+    }
+
+    // Display all resources.
+    public function showAll() {
+        $contratos = Contrato::all();
+        return response()->json($contratos);
     }
 
     /**
