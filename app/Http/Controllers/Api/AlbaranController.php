@@ -59,4 +59,16 @@ class AlbaranController extends Controller
             'albaran' => $albaran
         ], 201);
     }
+
+    // Remove the specified resource from storage.
+    public function destroy(string $id) {
+
+        $albaran = Albaran::find($id);
+
+        $albaran->delete();
+
+        return response()->json([
+            'mensaje' => 'Albarán eliminado correctamente'
+        ], 200);
+    }
 }
