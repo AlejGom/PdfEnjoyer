@@ -8,6 +8,6 @@ Route::get('/', [AlbaranWebController::class, 'index']);
 
 Route::get('albaran/{id}', [AlbaranWebController::class, 'show']);
 
-Route::get('añadirAlbaran', [AlbaranWebController::class, 'create']);
+Route::get('crearAlbaran', [AlbaranWebController::class, 'create']);
 
 

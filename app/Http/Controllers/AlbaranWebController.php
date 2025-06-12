@@ -14,9 +14,11 @@ class AlbaranWebController extends Controller
     }
 
     public function show($id) {
-        /* $albaran = Albaran::findOrFail($id); */
+        $albaran = Albaran::find($id);
 
-        return view('show');
+        return view('show', [
+            'albaran'=> $albaran
+        ]);
     }
 
     public function create() {
