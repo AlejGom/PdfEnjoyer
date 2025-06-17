@@ -16,11 +16,20 @@
                 <th>Archivo</th>
                 <th>Fecha</th>
                 <th>Creado</th>
-                <th>Actualizado</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
+            @foreach ($albaranes as $albaran)
+                <tr>
+                    <td>{{ $albaran['id'] }}</td>
+                    <td>{{ $albaran['nombre'] }}</td>
+                    <td>{{ $albaran['subnombre'] }}</td>
+                    <td><a href="{{ asset($albaran['archivo']) }}" target="_blank">Ver PDF</a></td>
+                    <td>{{ $albaran['fecha'] }}</td>
+                    <td>{{ $albaran['created_at'] }}</td>
+                </tr>
+            @endforeach
+            <!-- <tr>
                 <td>Ejemplo</td>
                 <td>Ejemplo</td>
                 <td>Ejemplo</td>
@@ -37,7 +46,7 @@
                 <td>Ejemplo</td>
                 <td>Ejemplo</td>
                 <td>Ejemplo</td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>

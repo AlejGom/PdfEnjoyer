@@ -10,9 +10,9 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/saludo', [AlbaranController::class, 'mostrarSaludo']);
 
-Route::get('/contratos', [AlbaranController::class,'index']);
+Route::get('/albaranes', [AlbaranController::class,'index']);
 
-Route::get('/contratos/{id}', [AlbaranController::class,'show']);
+Route::get('/albaranes/{id}', [AlbaranController::class,'show']);
 
 Route::post('/CrearAlbaran', [AlbaranController::class,'store']);
 

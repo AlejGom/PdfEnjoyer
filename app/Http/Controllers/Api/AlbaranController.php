@@ -27,11 +27,12 @@ class AlbaranController extends Controller
         $albaran = Albaran::find($id);
 
         return response()->json([
-            'id'       => $albaran->id,
-            'nombre'   => $albaran->nombre,
-            'subnombre'=> $albaran->subnombre,
-            'archivo'  => $albaran->archivo,
-            'fecha'    => $albaran->fecha
+            'id'         => $albaran->id,
+            'nombre'     => $albaran->nombre,
+            'subnombre'  => $albaran->subnombre,
+            'archivo'    => $albaran->archivo,
+            'fecha'      => $albaran->fecha,
+            'created_at' => $albaran->created_at,
         ]);
     }
 
