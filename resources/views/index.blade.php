@@ -29,24 +29,6 @@
                     <td>{{ $albaran['created_at'] }}</td>
                 </tr>
             @endforeach
-            <!-- <tr>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td><a href="">Ver PDF</a></td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-            </tr>
-            <tr>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td><a href="">Ver PDF</a></td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-                <td>Ejemplo</td>
-            </tr> -->
         </tbody>
     </table>
 </div>
