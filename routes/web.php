@@ -10,4 +10,5 @@ Route::get('albaran/{id}', [AlbaranWebController::class, 'show']);
 
 Route::get('crearAlbaran', [AlbaranWebController::class, 'create']);
 
+Route::post('addAlbaran', [AlbaranWebController::class, 'store'])->name('addAlbaran');
 

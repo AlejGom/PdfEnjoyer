@@ -7,13 +7,8 @@
 <h1>Crear Albarán</h1>
 
 <div class="formulario-container">
-    <form action="" method="POST" enctype="multipart/form-data" class="formulario-albaran">
+    <form action="{{ route('addAlbaran') }}" method="POST" enctype="multipart/form-data" class="formulario-albaran">
         @csrf
-
-        <div class="form-group">
-            <label for="nombre">Nombre *</label>
-            <input type="text" name="nombre" id="nombre" required>
-        </div>
 
         <div class="form-group">
             <label for="subnombre">Subnombre</label>

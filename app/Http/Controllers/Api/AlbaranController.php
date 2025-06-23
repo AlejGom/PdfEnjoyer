@@ -40,21 +40,22 @@ class AlbaranController extends Controller
     public function store(Request $request) {
         
         $request->validate([
-            'nombre'   => 'required|string',
             'subnombre'=> 'required|string',
             'archivo'  => 'required|file|mimes:pdf',
             'fecha'    => 'required|date',
         ]);
 
-        $rutaArchivo = $request->file('archivo')->store('albaranes', 'public');
+        $archivo     = $request->file('archivo');
+        $nombreBase  = pathinfo($archivo->getClientOriginalName(), PATHINFO_FILENAME);
+        $rutaArchivo = $archivo->store('albaranes', 'public');
 
         $albaran = Albaran::create([
-            'nombre'   => $request->nombre,
-            'subnombre'=> $request->subnombre,
-            'archivo'  => $rutaArchivo,
-            'fecha'    => $request->fecha,
+            'nombre'     => $nombreBase,
+            'subnombre'  => $request->subnombre,
+            'archivo'    => 'storage/' . $rutaArchivo,
+            'fecha'      => $request->fecha,
         ]);
-
+        
         return response()->json([
             'mensaje' => 'Albarán guardado correctamente',
             'albaran' => $albaran
