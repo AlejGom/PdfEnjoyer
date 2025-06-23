@@ -49,5 +49,34 @@ class AlbaranWebController extends Controller
         return view('create');
     }
 
+        public function store(Request $request) {
+        
+        $request->validate([
+            'nombre'    => 'required|string',
+            'subnombre' => 'required|string',
+            'archivo'   => 'required|file|mimes:pdf',
+            'fecha'     => 'required|date',
+        ]);
+
+        $archivo       = $request->file('archivo');
+        $path          = $archivo->store('public/albaranes');
+        $archivoNombre = basename($path);
+
+        $rutaPublica = 'storage/albaranes/'.$archivoNombre;
+
+        $response = Http::post('http://192.168.1.20/api/CrearAlbaran', [
+            'nombre'=> $request->nombre,
+            'subnombre'=> $request->subnombre,
+            'fecha'=> $request->fecha,
+            'archivo'=> $rutaPublica,
+        ]);
+
+        if($response->successful()) {
+            return redirect()->route('albaranes.index')->with('success', 'Albarán creado correctamente');
+        } else {
+            return back()->with('error', 'Error al crear el albarán');
+        }
+    }
+
 
 }
