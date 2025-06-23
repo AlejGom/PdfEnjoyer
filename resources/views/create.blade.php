@@ -11,8 +11,8 @@
         @csrf
 
         <div class="form-group">
-            <label for="subnombre">Subnombre</label>
-            <input type="text" name="subnombre" id="subnombre">
+            <label for="subnombre">Subnombre *</label>
+            <input type="text" name="subnombre" id="subnombre" required>
         </div>
 
         <div class="form-group">
