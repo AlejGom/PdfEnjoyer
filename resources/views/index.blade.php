@@ -4,6 +4,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
+<a href="/crearAlbaran" class="green-button-generic">Añadir Albarán</a>
+
 <h1>Listado de albaranes</h1>
 
 <div class="tabla-container">
