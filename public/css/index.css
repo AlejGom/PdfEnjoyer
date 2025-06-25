@@ -113,6 +113,24 @@ a:hover {
     background-color: #3c4412;
 }
 
+.acciones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.trashIcon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.trashIcon:hover {
+    transform: scale(1.2);
+}
+
 /* 
     Color Alpesan------------#afc82e
     Color Alpesan oscuro-----#6e7d1f

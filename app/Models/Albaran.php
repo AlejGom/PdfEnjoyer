@@ -15,5 +15,5 @@ class Albaran extends Model
         "fecha"
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 }

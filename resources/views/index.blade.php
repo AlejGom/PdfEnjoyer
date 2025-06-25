@@ -18,6 +18,7 @@
                 <th>Archivo</th>
                 <th>Fecha</th>
                 <th>Creado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,11 @@
                     <td><a href="{{ asset($albaran['archivo']) }}" target="_blank">Ver PDF</a></td>
                     <td>{{ $albaran['fecha'] }}</td>
                     <td>{{ $albaran['created_at'] }}</td>
+                    <td class="acciones">
+                        <a class="deleteLink" href="#" data-id="{{ $albaran['id'] }}" onclick="event.preventDefault(); confirmarEliminacion(this)">
+                            <img class="trashIcon" src="{{ asset('images/delete.png') }}" alt="Eliminar">
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -36,3 +42,14 @@
 </div>
 
 @endsection
+
+<!-- SCRIPTS -->
+
+<script>
+    function confirmarEliminacion(element) {
+        const id = element.getAttribute('data-id');
+        if (confirm('¿Estás seguro de que deseas eliminar este albarán? Esta acción no se puede deshacer.')) {
+            window.location.href = `/api/eliminarAlbaran/${id}`;
+        }
+    }
+</script>
