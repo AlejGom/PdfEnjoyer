@@ -31,8 +31,11 @@
                     <td>{{ $albaran['fecha'] }}</td>
                     <td>{{ $albaran['created_at'] }}</td>
                     <td class="acciones">
-                        <a class="deleteLink" href="#" data-id="{{ $albaran['id'] }}" onclick="event.preventDefault(); confirmarEliminacion(this)">
-                            <img class="trashIcon" src="{{ asset('images/delete.png') }}" alt="Eliminar">
+                        <a class="actionsLink" href="#" data-id="{{ $albaran['id'] }}" onclick="event.preventDefault(); confirmarEliminacion(this)">
+                            <img class="actionIcon" src="{{ asset('images/delete.png') }}" alt="Eliminar">
+                        </a>
+                        <a class="actionsLink" href="#">
+                            <img class="actionIcon" src="{{ asset('images/edit.png') }}" alt="Editar">
                         </a>
                     </td>
                 </tr>
