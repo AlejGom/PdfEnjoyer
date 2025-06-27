@@ -67,6 +67,12 @@ class AlbaranController extends Controller
 
         $albaran = Albaran::find($id);
 
+        if (!$albaran) {
+            return response()->json([
+                'error' => 'Albarán no encontrado'
+            ], 404);
+        }
+
         $albaran->delete();
 
         return response()->json([

@@ -48,8 +48,31 @@
 <script>
     function confirmarEliminacion(element) {
         const id = element.getAttribute('data-id');
+    
         if (confirm('¿Estás seguro de que deseas eliminar este albarán? Esta acción no se puede deshacer.')) {
-            window.location.href = `/api/eliminarAlbaran/${id}`;
+            fetch('/api/EliminarAlbaran/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    const row = element.closest('tr');
+                    row.remove();
+                } else {
+                    /* alert('Error al eliminar el albarán'); */
+                    return response.json().then(data => {
+                        alert('Error: ' + (data?.error ?? 'Error al eliminar el albarán'));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error al eliminar el albarán');
+            });
         }
+
     }
 </script>
