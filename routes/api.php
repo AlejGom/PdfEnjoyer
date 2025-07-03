@@ -17,3 +17,5 @@ Route::get('/albaranes/{id}', [AlbaranController::class,'show']);
 Route::post('/CrearAlbaran', [AlbaranController::class,'store']);
 
 Route::delete('/EliminarAlbaran/{id}', [AlbaranController::class,'destroy']);
+
+Route::put('/EditarAlbaran/{id}', [AlbaranController::class,'update']);

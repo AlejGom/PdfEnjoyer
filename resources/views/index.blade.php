@@ -34,7 +34,7 @@
                         <a class="actionsLink" href="#" data-id="{{ $albaran['id'] }}" onclick="event.preventDefault(); confirmarEliminacion(this)">
                             <img class="actionIcon" src="{{ asset('images/delete.png') }}" alt="Eliminar">
                         </a>
-                        <a class="actionsLink" href="#">
+                        <a class="actionsLink" href="#" data-id="{{ $albaran['id'] }}" onclick="event.preventDefault(); abrirModal(this)" >
                             <img class="actionIcon" src="{{ asset('images/edit.png') }}" alt="Editar">
                         </a>
                     </td>
@@ -46,9 +46,35 @@
 
 @endsection
 
+<!-- MODAL -->
+<div id="modalEdicion" class="modal">
+    <div class="modal-content formulario-container">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Editar Albarán</h2>
+
+        <form id="formularioEditar" class="formulario-albaran">
+            <input type="hidden" id="edit_id" name="id">
+
+            <div class="form-group">
+                <label for="edit_subnombre">Subnombre *</label>
+                <input type="text" id="edit_subnombre" name="subnombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit_fecha">Fecha *</label>
+                <input type="date" id="edit_fecha" name="fecha" required>
+            </div>
+
+            <button type="submit">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+
 <!-- SCRIPTS -->
 
 <script>
+    /* Función para confirmar la eliminación */
     function confirmarEliminacion(element) {
         const id = element.getAttribute('data-id');
     
@@ -76,6 +102,65 @@
                 alert('Error al eliminar el albarán');
             });
         }
-
     }
+
+    /* Función para abrir el modal */
+    function abrirModal(element) {
+        const id = element.getAttribute('data-id');
+
+        fetch(`/api/albaranes/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('edit_id').value = data.id;
+            document.getElementById('edit_subnombre').value = data.subnombre;
+            document.getElementById('edit_fecha').value = data.fecha;
+
+            document.getElementById('modalEdicion').style.display = 'block';
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Error al cargar el albarán');
+        });
+    }
+
+    /* Función para cerrar el modal */
+    function cerrarModal() {
+        document.getElementById('modalEdicion').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const formularioEditar = document.getElementById('formularioEditar');
+        
+        formularioEditar.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const id        = document.getElementById('edit_id').value;
+            const subnombre = document.getElementById('edit_subnombre').value;
+            const fecha     = document.getElementById('edit_fecha').value;
+
+            fetch('/api/EditarAlbaran/' + id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ subnombre, fecha })
+            })
+            .then(response => {
+                if (response.ok) {
+                    /* alert('Albarán editado correctamente'); */
+                    cerrarModal();
+                    location.reload();
+                } else {
+                    return response.json().then(data => {
+                        alert('Error: ' + (data?.error ?? 'Error al editar el albarán'));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar', error);
+                alert('Error al editar el albarán');
+            });
+        });
+    });
 </script>

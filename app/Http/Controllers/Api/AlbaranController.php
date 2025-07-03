@@ -79,4 +79,30 @@ class AlbaranController extends Controller
             'mensaje' => 'Albarán eliminado correctamente'
         ], 200);
     }
+
+    // Update the specified resource in storage.
+    public function update(Request $request, $id) {
+
+        $albaran = Albaran::find($id);
+
+        if (!$albaran) {
+            return response()->json([
+                'error' => 'Albarán no encontrado'
+            ], 404);
+        }
+
+        $request->validate([
+            'subnombre' => 'required|string|max:255',
+            'fecha'     => 'required|date',
+        ]);
+
+        $albaran->subnombre = $request->input('subnombre');
+        $albaran->fecha     = $request->input('fecha');
+        $albaran->save();
+
+        return response()->json([
+            'mensaje' => 'Albarán actualizado correctamente',
+            'albaran' => $albaran
+        ]);
+    }
 }
